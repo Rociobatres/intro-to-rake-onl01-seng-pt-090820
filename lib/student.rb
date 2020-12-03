@@ -1,5 +1,6 @@
 require_relative "../config/environment.rb"
 
+
 class Student
 
   # Remember, you can access your database connection anywhere in this class
@@ -24,6 +25,10 @@ class Student
         )
     SQL
     DB[:conn].execute(sql) 
+    namespace :db do
+  desc 'migrate changes to your database'
+  task :migrate => :environment do
+    Student.create_table
   end
 
   def self.drop_table
